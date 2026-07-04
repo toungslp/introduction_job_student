@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="lo">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ລະບົບແນະນໍາເສັ້ນທາງອາຊີບ - ຫຼັກສູດວິຊາຊີບຊັ້ນສູງ</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Noto Sans Lao & Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Lao:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Premium Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans Lao', 'Poppins', 'sans-serif'],
+                    },
+                    colors: {
+                        brand: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Noto Sans Lao', 'Poppins', sans-serif;
+            background-color: #f8fafc;
+            line-height: 1.8;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+    </style>
+</head>
+<body class="text-slate-800 min-height-screen flex flex-col">
+
+    <!-- TOP NAVIGATION BAR -->
+    <header class="bg-brand-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <div class="flex items-center gap-3">
+                <div class="bg-amber-500 text-brand-900 p-2.5 rounded-xl shadow-inner">
+                    <i class="fa-solid fa-graduation-cap text-2xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-xl leading-tight">ຄູ່ມືເສັ້ນທາງອາຊີບ ແລະ ການສຶກສາ</h1>
+                    <p class="text-xs text-brand-200">ລະບົບສັງລວມ 28 ຫຼັກສູດວິຊາຊີບຊັ້ນສູງ (TVET Laos)</p>
+                </div>
+            </div>
+            <nav class="flex bg-brand-800/80 p-1 rounded-xl border border-brand-700">
+                <button onclick="switchView('slides')" id="btn-slides" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition bg-amber-500 text-brand-900">
+                    <i class="fa-solid fa-desktop mr-1.5"></i> ໂໝດສະໄລ້
+                </button>
+                <button onclick="switchView('directory')" id="btn-directory" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition text-brand-100 hover:text-white">
+                    <i class="fa-solid fa-list-check mr-1.5"></i> ຄົ້ນຫາທຸກອາຊີບ
+                </button>
+                <button onclick="switchView('quiz')" id="btn-quiz" class="nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition text-brand-100 hover:text-white">
+                    <i class="fa-solid fa-circle-question mr-1.5"></i> ຄົ້ນຫາຕົວຕົນ
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN APP CONTAINER -->
+    <main class="flex-grow max-w-7xl w-full mx-auto p-4 md:p-6">
+        
+        <!-- ==================== 1. SLIDES VIEW ==================== -->
+        <section id="view-slides" class="block">
+            <!-- Slide Stage -->
+            <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-slate-100 min-h-[580px] flex flex-col justify-between relative transition-all duration-300">
+                
+                <!-- Slide Top Info -->
+                <div class="bg-slate-50 px-6 py-4 border-b border-slate-100 flex justify-between items-center">
+                    <span class="text-xs font-bold uppercase tracking-wider text-brand-600 bg-brand-50 px-3 py-1.5 rounded-full" id="slide-badge">ໝວດໝູ່ອາຊີບ</span>
+                    <span class="text-sm font-medium text-slate-400" id="slide-counter">ສະໄລ້ທີ 1 ຈາກ 10</span>
+                </div>
+
+                <!-- Slide Active Content -->
+                <div class="flex-grow p-6 md:p-10 flex flex-col justify-center" id="slide-content-container">
+                    <!-- Dynamic content loaded via JS -->
+                </div>
+
+                <!-- Slide Navigation & Footer -->
+                <div class="bg-slate-50 px-6 py-5 border-t border-slate-100 flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div class="flex gap-2 w-full sm:w-auto">
+                        <button onclick="prevSlide()" class="flex-1 sm:flex-initial bg-white border border-slate-200 hover:bg-slate-100 text-slate-700 px-5 py-2.5 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-arrow-left"></i> ກັບຄືນ
+                        </button>
+                        <button onclick="nextSlide()" class="flex-1 sm:flex-initial bg-brand-700 hover:bg-brand-800 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition flex items-center justify-center gap-2">
+                            ຖັດໄປ <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                    <!-- Dots indicator -->
+                    <div class="flex gap-1.5" id="slide-dots">
+                        <!-- Dynamic dots -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 2. DIRECTORY VIEW ==================== -->
+        <section id="view-directory" class="hidden">
+            <div class="bg-white rounded-3xl shadow-xl p-6 border border-slate-100">
+                <!-- Header & Search Controls -->
+                <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold text-slate-900">ຄູ່ມືລາຍລະອຽດ 28 ຫຼັກສູດວິຊາຊີບ</h2>
+                        <p class="text-sm text-slate-500 mt-1">ຄົ້ນຫາ, ຈັດກຸ່ມ, ແລະ ສຶກສາເງື່ອນໄຂ ເພື່ອວາງແຜນອະນາຄົດຂອງທ່ານ</p>
+                    </div>
+                    <!-- Search input -->
+                    <div class="relative w-full md:w-80">
+                        <i class="fa-solid fa-magnifying-glass absolute left-4 top-3.5 text-slate-400"></i>
+                        <input type="text" id="dir-search" oninput="filterDirectory()" placeholder="ຄົ້ນຫາສາຂາຮຽນ ຫຼື ອາຊີບ..." class="w-full pl-11 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-brand-600 transition">
+                    </div>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap gap-2 mb-6" id="dir-filters">
+                    <button onclick="filterCategory('all')" class="cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-brand-700 text-white" data-cat="all">ທັງໝົດ</button>
+                    <button onclick="filterCategory('automotive')" class="cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-cat="automotive">ເຕັກນິກລົດຍົນ</button>
+                    <button onclick="filterCategory('electrical')" class="cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-cat="electrical">ໄຟຟ້າ & ເຄື່ອງເຢັນ</button>
+                    <button onclick="filterCategory('mechanical')" class="cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-cat="mechanical">ກົນຈັກ & ການຈອດ</button>
+                    <button onclick="filterCategory('it')" class="cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-cat="it">ໄອທີ & ດິຈິຕອນ</button>
+                    <button onclick="filterCategory('business')" class="cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-cat="business">ບໍລິຫານ & ໂລຈິສຕິກ</button>
+                    <button onclick="filterCategory('construction')" class="cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-cat="construction">ກໍ່ສ້າງ & ສະຖາປັດ</button>
+                    <button onclick="filterCategory('arts')" class="cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-cat="arts">ສິລະປະ & ການອອກແບບ</button>
+                    <button onclick="filterCategory('hospitality')" class="cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200" data-cat="hospitality">ທ່ອງທ່ຽວ & ບໍລິການ</button>
+                </div>
+
+                <!-- Directory Grid Content -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="directory-grid">
+                    <!-- Dynamic courses cards will build here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== 3. QUIZ VIEW ==================== -->
+        <section id="view-quiz" class="hidden">
+            <div class="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl p-6 md:p-10 border border-slate-100">
+                <div class="text-center mb-8">
+                    <div class="inline-block bg-amber-100 text-amber-700 px-4 py-1.5 rounded-full text-xs font-bold mb-3 uppercase tracking-wider">ເຄື່ອງມືຊ່ວຍຕັດສິນໃຈ</div>
+                    <h2 class="text-3xl font-bold text-slate-900">ຄົ້ນຫາສາຂາວິຊາຊີບທີ່ເໝາະກັບທ່ານ</h2>
+                    <p class="text-slate-500 mt-2">ຕອບຄຳຖາມງ່າຍໆ 4 ຂໍ້ ເພື່ອວິເຄາະທັກສະ ແລະ ສາຂາທີ່ເໝາະສົມກັບບຸກຄະລິກຂອງທ່ານທີ່ສຸດ</p>
+                </div>
+
+                <!-- Quiz Progress Bar -->
+                <div class="w-full bg-slate-100 h-2.5 rounded-full mb-8 overflow-hidden">
+                    <div id="quiz-progress" class="bg-brand-600 h-full transition-all duration-300" style="width: 25%"></div>
+                </div>
+
+                <!-- Quiz Card Container -->
+                <div id="quiz-card" class="bg-slate-50 rounded-2xl p-6 border border-slate-100 min-h-[300px] flex flex-col justify-between">
+                    <!-- Dynamic Question & Answers loaded via JS -->
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- APP NOTIFICATION TOAST -->
+    <div id="toast" class="fixed bottom-5 right-5 bg-slate-900 text-white px-5 py-3.5 rounded-xl shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300 z-50">
+        <i id="toast-icon" class="fa-solid fa-circle-info text-amber-400"></i>
+        <span id="toast-text" class="text-sm font-medium">ຂໍ້ຄວາມແຈ້ງເຕືອນ</span>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 py-10 mt-12 border-t border-slate-800">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-sm">ລະບົບແນະນຳອາຊີບ ແລະ ຫຼັກສູດວິຊາຊີບຊັ້ນສູງ (TVET) ສປປ ລາວ</p>
+            <p class="text-xs text-slate-500 mt-2">ພັດທະນາໂດຍການຮ່ວມມືເພື່ອຍົກສູງສີມືແຮງງານແຫ່ງຊາດ</p>
+            <div class="flex justify-center gap-4 mt-6">
+                <span class="text-xs bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">ຮູບແບບບໍ່ມີຮູບຄົນ (No-human stock images)</span>
+                <span class="text-xs bg-slate-800 px-3 py-1.5 rounded-lg border border-slate-700">ຮອງຮັບທຸກອຸປະກອນ</span>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== WEB APP JAVASCRIPT LOGIC ==================== -->
+    <script>
+        // 28 COMPLETE TVET COURSES DATABASE
+        const courses = [
+            {
+                id: 1,
+                title: "ສ້ອມແປງເຄື່ອງໃຊ້ໄຟຟ້າໃນຄົວເຮືອນ",
+                category: "electrical",
+                badge: "ໄຟຟ້າ & ເຄື່ອງເຢັນ",
+                hours: "2,688 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ, ສຸຂະພາບແຂງແຮງດີ",
+                about: "ຮຽນກ່ຽວກັບການບຳລຸງຮັກສາ, ກວດເຊັກ ແລະ ສ້ອມແປງບັນດາອຸປະກອນໄຟຟ້າພາຍໃນບ້ານທຸກຊະນິດ ເຊັ່ນ: ໝໍ້ຫຸ່ງເຂົ້າ, ເຕົາລີດ, ພັດລົມ, ເຄື່ອງຊັກຜ້າ ແລະ ເຄື່ອງຈັກຫຍິບໄຟຟ້າ.",
+                jobs: "ຊ່າງສ້ອມແປງເຄື່ອງໃຊ້ໄຟຟ້າປະຈໍາສູນບໍລິການ, ເຈົ້າຂອງຮ້ານສ້ອມແປງເຄື່ອງໃຊ້ໄຟຟ້າ, ຫຼື ຝ່າຍບຳລຸງຮັກສາໃນອາຄານ.",
+                modules: ["ໝໍ້ຫຸ່ງເຂົ້າໄຟຟ້າ", "ເຕົາລີດ", "ໝໍ້ກະທະ", "ເຄື່ອງເປົ່າຜົມ", "ໝໍ້ຕົ້ມນໍ້າ", "ເຕົາໄຟຟ້າ", "ເຄື່ອງປັ່ນໝາກໄມ້", "ໝໍ້ນໍ້າອຸ່ນ", "ພັດລົມ", "ຕູ້ຊັກຜ້າ", "ເຄື່ອງຈັກຫຍິບເຄື່ອງ", "ເຄື່ອງຕົ້ມກາເຟ", "ເຄື່ອງດູດຝຸ່ນ", "ປໍ້ານໍ້າຂະໜາດນ້ອຍ"],
+                image: "https://images.unsplash.com/photo-1517059224940-d4af9eec41b7?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 2,
+                title: "E-Commerce (ການຄ້າເອເລັກໂຕຣນິກ)",
+                category: "business",
+                badge: "ບໍລິຫານ & ໂລຈິສຕິກ",
+                hours: "3,376 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ເນັ້ນໃສ່ການຄ້າຂາຍອອນລາຍຍຸກໃໝ່, ການວິເຄາະພຶດຕິກຳຜູ້ບໍລິໂພກດ້ວຍເຕັກໂນໂລຊີ AI, ການຂຽນບົດຄວາມດຶງດູດລູກຄ້າ (Content Writing), ບັນຊີ ແລະ ການເຈລະຈາທຸລະກິດ.",
+                jobs: "ພະນັກງານພັດທະນາການຂາຍອອນລາຍ, ນັກບໍລິຫານການຄ້າ E-Commerce, ຜູ້ຮ່ວມງານຝ່າຍການຕະຫຼາດດີຈີຕອນ ຫຼື ຜູ້ປະກອບການອອນລາຍ.",
+                modules: ["ການບໍລິການລູກຄ້າກ່ອນ-ຫຼັງການຂາຍ", "ການຮັກສາຄວາມສໍາພັນກັບລູກຄ້າ (CRM)", "ການຂຽນບົດຄວາມ Content", "ການວິເຄາະຂໍ້ມູນດ້ວຍ AI", "ບັນຊີພື້ນຖານ"],
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 3,
+                title: "ການຂົນສົ່ງສິນຄ້າ (Logistics)",
+                category: "business",
+                badge: "ບໍລິຫານ & ໂລຈິສຕິກ",
+                hours: "3,376 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ສຶກສາການວາງແຜນເສັ້ນທາງຂົນສົ່ງ, ການວິເຄາະຊ່ອງທາງການກະຈາຍສິນຄ້າ ແລະ ຕ່ອງໂສ້ອຸປະທານ ເພື່ອຫຼຸດຜ່ອນຕົ້ນທຶນ ແລະ ເພີ່ມປະສິດທິພາບການຈັດສົ່ງ.",
+                jobs: "ນັກວິຊາການດ້ານການຂົນສົ່ງ, ຜູ້ວາງແຜນການຈັດສົ່ງສິນຄ້າ, ພະນັກງານປະສານງານການຂົນສົ່ງລະຫວ່າງປະເທດ.",
+                modules: ["ການວາງແຜນໃນການຂົນສົ່ງ", "ເຕັກນິກການວິເຄາະຂໍ້ມູນການຂົນສົ່ງ", "ການຈັດຕາຕະລາງການຂົນສົ່ງ", "ການປະເມີນຄ່າໃຊ້ຈ່າຍ", "ການວິເຄາະຄວາມຕ້ອງການລູກຄ້າ"],
+                image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 4,
+                title: "ການຈັດຊື້ສິນຄ້າ (Procurement)",
+                category: "business",
+                badge: "ບໍລິຫານ & ໂລຈິສຕິກ",
+                hours: "3,376 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນຮູ້ຂະບວນການຈັດຊື້ພາຍໃນ ແລະ ຕ່າງປະເທດ, ການຈັດການເອກະສານນໍາເຂົ້າ-ສົ່ງອອກ, ລະບົບພາສີຜ່ານແດນ, ແລະ ການນໍາໃຊ້ໂປຣແກຣມ ERP ໃນການວາງແຜນຊັບພະຍາກອນ.",
+                jobs: "ນັກວິຊາການດ້ານການຈັດຊື້, ຜູ້ຄຸ້ມຄອງຕ່ອງໂສ້ອຸປະທານ, ພະນັກງານຈັດການເອກະສານນໍາເຂົ້າ-ສົ່ງອອກ.",
+                modules: ["ການດຳເນີນການຈັດຊື້", "ການວາງແຜນຊັບພະຍາກອນຕ່ອງໂສ້ອຸປະທານ", "ການວິເຄາະຄວາມຕ້ອງການລູກຄ້າ", "ການນໍາໃຊ້ ERP", "ການເຮັດເອກະສານຜ່ານແດນ"],
+                image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 5,
+                title: "ການຕະຫຼາດເອເລັກໂຕຣນິກ (E-Marketing)",
+                category: "business",
+                badge: "ບໍລິຫານ & ໂລຈິສຕິກ",
+                hours: "3,376 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ເນັ້ນໜັກການຕະຫຼາດຜ່ານເວທີສັງຄົມອອນລາຍ (Facebook, YouTube, TikTok, Line), ການຜະລິດສື່ໂຄສະນາ, ແລະ ງານອອກແບບອັດສະລິຍະ (ໂລໂກ້, ແຜ່ນພັບ, ນາມບັດ).",
+                jobs: "ນັກການຕະຫຼາດດີຈີຕອນ, ຄຣີເອເຕີ້ສ້າງຄອນເທັ້ນ (Content Creator), ຜູ້ດູແລສື່ສັງຄົມອອນລາຍຂອງອົງກອນ.",
+                modules: ["ການຕະຫຼາດຂັ້ນພື້ນຖານ", "ການນໍາໃຊ້ເຄື່ອງມືການຕະຫຼາດເອເລັກໂຕຣນິກ", "ການອອກແບບສື່ສິ່ງພິມ", "ການສ້າງສື່ໂຄສະນາ", "ການຄ້າເອເລັກໂຕຣນິກພື້ນຖານ"],
+                image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 6,
+                title: "ການບໍລິຫານການຜະລິດສິນຄ້າ (Production Admin)",
+                category: "business",
+                badge: "ບໍລິຫານ & ໂລຈິສຕິກ",
+                hours: "3,392 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນຮູ້ການຄວບຄຸມການຜະລິດໃນລະບົບອຸດສາຫະກຳ, ການຫຼຸດຜ່ອນຕົ້ນທຶນ ແລະ ຄວາມສູນເສຍ (Lean Manufacturing), ແລະ ການຄຸ້ມຄອງແຜນການຜະລິດດ້ວຍ ERP.",
+                jobs: "ພະນັກງານຄວບຄຸມຄຸນນະພາບ (QA/QC), ຜູ້ບໍລິຫານການຜະລິດສິນຄ້າໃນໂຮງງານ, ຜູ້ວາງແຜນວັດຖຸດິບການຜະລິດ.",
+                modules: ["ການວາງແຜນການຜະລິດສິນຄ້າ", "ການວາງແຜນການຜະລິດແບບບໍ່ຕໍ່ເນື່ອງ", "ການວາງແຜນການຜະລິດແບບຕໍ່ເນື່ອງ", "Lean manufacturing", "ການຄວບຄຸມຄຸນນະພາບ"],
+                image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 7,
+                title: "ການບໍລິຫານສາງສິນຄ້າ (Warehouse Management)",
+                category: "business",
+                badge: "ບໍລິຫານ & ໂລຈິສຕິກ",
+                hours: "3,376 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ການຈັດການຄັງສິນຄ້າໃຫ້ເປັນລະບົບ, ການຮັບ-ເກັບ-ຈ່າຍສິນຄ້າ, ການນໍາໃຊ້ເຕັກໂນໂລຊີກວດສອບສະຕັອກສິນຄ້າ ແລະ ການຮັກສາຄວາມປອດໄພລະດັບສາກົນ.",
+                jobs: "ຫົວໜ້າຄັງສິນຄ້າ, ພະນັກງານຄຸ້ມຄອງສະຕັອກ, ນັກບໍລິຫານຈັດການສາງສິນຄ້າ.",
+                modules: ["ການຮັບສິນຄ້າ", "ເຕັກນິກການຄັດແຍກຈັດເກັບ", "ການຈັດສິນຄ້າກຽມຈ່າຍ", "ການເບີກຈ່າຍສິນຄ້າ", "ຄວາມປອດໄພໃນສະຖານທີ່ເຮັດວຽກ"],
+                image: "https://images.unsplash.com/photo-1590674899484-d5640e854abe?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 8,
+                title: "ຕັດຫຍິບເຄື່ອງນຸ່ງ (Tailoring & Fashion)",
+                category: "arts",
+                badge: "ສິລະປະ & ການອອກແບບ",
+                hours: "3,534 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.3 ຂຶ້ນໄປ ຫຼື ສໍາເລັດຫຼັກສູດວິຊາຊີບລະດັບ 4",
+                about: "ຮຽນຮູ້ເຕັກນິກການຕັດຫຍິບຂັ້ນສູງ ທັງຊຸດປະຈໍາຊາດລາວ, ຊຸດສາກົນ, ຊຸດລາຕີ, ເສື້ອແວັດ ແລະ ການນໍາໃຊ້ຈັກຫຍິບອຸດສາຫະກຳສະໄໝໃໝ່.",
+                jobs: "ຊ່າງຕັດຫຍິບເສື້ອຜ້າລະດັບສູງ, ເຈົ້າຂອງຫ້ອງເສື້ອ, ນັກອອກແບບແຟຊັ່ນ ຫຼື ຫົວໜ້າຄຸມງານຕັດຫຍິບໃນໂຮງງານງານຕັດຫຍິບ.",
+                modules: ["ຕັດຫຍິບໂສ້ງຫົວຄຸ້ມ", "ເສື້ອຊາຍຄໍມົນ", "ສິ້ນສໍາເລັດ", "ເສື້ອຍິງແບບບໍ່ມີຄໍ", "ຊຸດຕິດກັນເດັກຍິງ", "ກະໂປ່ງ", "ຊຸດລາຕີ", "ເສື້ອແວັດ ແລະ ເສື້ອກັກ"],
+                image: "https://images.unsplash.com/photo-1524295981977-62974b41399d?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 9,
+                title: "ກຣາບຟິກ ແລະ ສື່ໂຄສະນາ (Graphic & Media Design)",
+                category: "arts",
+                badge: "ສິລະປະ & ການອອກແບບ",
+                hours: "3,370 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນຮູ້ການອອກແບບສື່ສິ່ງພິມ, ພາບ 3 ມິຕິ (3D Modeling), ການອອກແບບສື່ສັງຄົມອອນລາຍ, ລວມເຖິງເຕັກນິກການຖ່າຍພາບ ແລະ ຕັດຕໍ່ວີດີໂອລະດັບມືອາຊີບ.",
+                jobs: "ນັກອອກແບບກຣາບຟິກ, ນັກຕັດຕໍ່ວີດີໂອ, ຝ່າຍໂຄສະນາ ແລະ ປະຊາສຳພັນ, ຄຣີເອທີຟດີຊາຍເນີ.",
+                modules: ["ການອອກແບບກຣາບຟິກພື້ນຖານ", "ການແຕ້ມຮູບ 3 ມິຕິ", "ການອອກແບບສື່ໂຄສະນາອອນລາຍ", "ການຖ່າຍພາບນິ້ງ ແລະ ພາບເຄື່ອນໄຫວ"],
+                image: "https://images.unsplash.com/photo-1561070791-26c113006238?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 10,
+                title: "ປຸງແຕ່ງອາຫານ ແລະ ບໍລິການເຄື່ອງດື່ມ (Culinary Art)",
+                category: "hospitality",
+                badge: "ທ່ອງທ່ຽວ & ບໍລິການ",
+                hours: "3,360 ຊົ່ວໂມງ (3 ປີ)",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນຮູ້ສິລະປະການປຸງແຕ່ງອາຫານລາວ ແລະ ສາກົນ, ການເຮັດເຂົ້າໜົມຫວານ-ເຄັກ, ການຕົກແຕ່ງຈານ, ການບໍລິການເຄື່ອງດື່ມ (Mixology) ແລະ ບໍລິຫານຮ້ານອາຫານ.",
+                jobs: "ພໍ່ຄົວ/ແມ່ຄົວ (Chef), ຜູ້ຊ່ວຍຄົວ, ພະນັກງານປະສົມເຄື່ອງດື່ມ (Bartender), ຜູ້ຈັດການຮ້ານອາຫານ.",
+                modules: ["ປຸງແຕ່ງແກງ/ຈືນ/ປີ້ງ", "ການຕົກແຕ່ງຈານ", "ອາຫານຫວານແລະເຄັມ", "ອາຫານທະເລ", "ການປະສົມເຄື່ອງດື່ມ", "ເຂົ້າຈີ່ແລະເຄັກ", "ການຈັດງານລ້ຽງ"],
+                image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 11,
+                title: "ການພັດທະນາໂປຣແກຣມ (Software Development)",
+                category: "it",
+                badge: "ໄອທີ & ດິຈິຕອນ",
+                hours: "3,466 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນການຂຽນ Code ເພື່ອສ້າງ Application, ການວິເຄາະຄວາມຕ້ອງການ ແລະ ຄວາມປອດໄພຂອງລະບົບ, ພ້ອມທັງທັກສະການສື່ສານ ແລະ ພາສາອັງກິດໄອທີ.",
+                jobs: "ນັກພັດທະນາຊອບແວ (Software Developer), ນັກທົດສອບລະບົບ (QA), ພະນັກງານໄອທີໃນອົງກອນ.",
+                modules: ["ທັກສະການພັດທະນາໂປຣແກຣມ", "ການແກ້ໄຂບັນຫາການສື່ສານ", "ພາສາອັງກິດເຕັກນິກ", "ການເຮັດວຽກເປັນທີມ"],
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 12,
+                title: "ອອກແບບ ແລະ ພັດທະນາເວັບໄຊ (Web Design & Development)",
+                category: "it",
+                badge: "ໄອທີ & ດິຈິຕອນ",
+                hours: "3,546 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນການອອກແບບໜ້າເວັບ (UX/UI Design) ໃຫ້ຮອງຮັບທຸກໜ້າຈໍ, ການພັດທະນາ FrontEnd & BackEnd, ລະບົບຖານຂໍ້ມູນ ແລະ ການສ້າງລະບົບຮ້ານຄ້າອອນລາຍ.",
+                jobs: "ນັກອອກແບບເວັບໄຊ (UI/UX Designer), ນັກພັດທະນາເວັບໄຊ (Web Developer), ຜູ້ດູແລລະບົບເວັບໄຊ.",
+                modules: ["ພື້ນຖານພັດທະນາ FrontEnd", "ການໃຊ້ Version Control (Github)", "ການອອກແບບ UX/UI", "ການພັດທະນາ BackEnd & ຖານຂໍ້ມູນ", "Responsive Web Design"],
+                image: "https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 13,
+                title: "ເຕັກນິກເຄືອຂ່າຍຄອມພິວເຕີ (Network Technician)",
+                category: "it",
+                badge: "ໄອທີ & ດິຈິຕອນ",
+                hours: "3,402 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນຮູ້ການຕິດຕັ້ງລະບົບເຄືອຂ່າຍສາຍ LAN, ໃຍແກ້ວນໍາແສງ (Fiber Optic), ການຕິດຕັ້ງກ້ອງວົງຈອນປິດ, ການຕັ້ງຄ່າ Server ແລະ ຄວາມປອດໄພເຄືອຂ່າຍ.",
+                jobs: "ຊ່າງເຕັກນິກເຄືອຂ່າຍ, ຜູ້ດູແລລະບົບ Network, ຊ່າງຕິດຕັ້ງກ້ອງວົງຈອນປິດ ແລະ ລະບົບ IT Support.",
+                modules: ["ການຕິດຕັ້ງຄອມພິວເຕີແລະອຸປະກອນ", "ການຕິດຕັ້ງສາຍສັນຍານ LAN/Fiber", "ການຕັ້ງຄ່າ Server", "ລະບົບຄວາມປອດໄພເຄືອຂ່າຍ"],
+                image: "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 14,
+                title: "ການບໍລິຫານການທ່ອງທ່ຽວ (Tourism Management)",
+                category: "hospitality",
+                badge: "ທ່ອງທ່ຽວ & ບໍລິການ",
+                hours: "2,880 ຊົ່ວໂມງ (3 ປີ)",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ການຈັດການຂໍ້ມູນແຫຼ່ງທ່ອງທ່ຽວ, ພຶດຕິກຳນັກທ່ອງທ່ຽວ, ການວາງແຜນພັດທະນາແຫຼ່ງທ່ອງທ່ຽວ ແລະ ການຈັດການຈອງປີ້ຍົນ-ໂຮງແຮມ.",
+                jobs: "ຜູ້ນຳທ່ຽວ (Guide), ພະນັກງານບໍລິສັດທ່ອງທ່ຽວ, ຜູ້ຈັດການລາຍການນຳທ່ຽວ, ຜູ້ບໍລິຫານການທ່ອງທ່ຽວ.",
+                modules: ["ວິທີການຈອງໂຮງແຮມ-ປີ້ຍົນ", "ເຕັກນິກການບໍລິການນຳທ່ຽວ", "ວິທີສ້າງລາຍການນຳທ່ຽວ", "ການປະສານງານການທ່ອງທ່ຽວ"],
+                image: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 15,
+                title: "ການບໍລິຫານການໂຮງແຮມ (Hotel Management)",
+                category: "hospitality",
+                badge: "ທ່ອງທ່ຽວ & ບໍລິການ",
+                hours: "2,752 ຊົ່ວໂມງ (3 ປີ)",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນຮູ້ວຽກງານຕ້ອນຮັບສ່ວນໜ້າ, ວຽກງານແມ່ບ້ານ, ການບໍລິການອາຫານ-ເຄື່ອງດື່ມ, ວາງແຜນຈັດງານລ້ຽງ ແລະ ພາສາອັງກິດສື່ສານສະເພາະໂຮງແຮມ.",
+                jobs: "ພະນັກງານຕ້ອນຮັບສ່ວນໜ້າ (Receptionist), ຫົວໜ້າແມ່ບ້ານ, ພະນັກງານບໍລິຫານຈັດການງານລ້ຽງໃນໂຮງແຮມ.",
+                modules: ["ການດໍາເນີນທຸລະກິດໂຮງແຮມ", "ພາສາອັງກິດສຳລັບໂຮງແຮມ", "ບໍລິການພະແນກຕ້ອນຮັບ-ແມ່ບ້ານ", "ວາງແຜນຈັດງານລ້ຽງ-ຫ້ອງປະຊຸມ", "ບໍລິການອາຫານແລະເຄື່ອງດື່ມ"],
+                image: "https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 16,
+                title: "ສ້ອມແປງເຄື່ອງຈັກກົນໂຮງງານຊັ້ນສູງ (Factory Mechanical)",
+                category: "mechanical",
+                badge: "ກົນຈັກ & ການຈອດ",
+                hours: "3,360 ຊົ່ວໂມງ (3 ປີ)",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນການສ້ອມແປງເຄື່ອງຈັກອຸດສາຫະກຳ, ການແຕ້ມແບບ 2D/3D, ການຄວບຄຸມເຄື່ອງຈັກກົນ (ຈັກຊ່ຽນ, ເຈຍລະໄນ, ຈັກກັດ), ແລະ ລະບົບໄຮໂດຣລິກ.",
+                jobs: "ຊ່າງສ້ອມແປງເຄື່ອງຈັກກົນໂຮງງານ, ຊ່າງກົນຈັກ, ວິຊາການບຳລຸງຮັກສາເຄື່ອງຈັກໃນໂຮງງານ.",
+                modules: ["ການປະຕິບັດຊ່າງຈັກກົນ", "ການນໍາໃຊ້ເຄື່ອງຈັກເຈາະ/ຊ່ຽນ/ກັດ", "ບໍລິການລະບົບສົ່ງກຳລັງ", "ລະບົບລໍ່ມີ່ນ-ລໍ່ເຢັນ", "ໄຮໂດຣລິກແລະໄຟຟ້າເຄື່ອງຈັກ"],
+                image: "https://images.unsplash.com/photo-1508962914676-134849a727f0?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 17,
+                title: "ຊ່າງຜະລິດເຟີນີເຈີໄມ້ (Furniture Maker)",
+                category: "arts",
+                badge: "ສິລະປະ & ການອອກແບບ",
+                hours: "3,360 ຊົ່ວໂມງ (3 ປີ)",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນຮູ້ການອອກແບບ ແລະ ຜະລິດເຟີນີເຈີໄມ້ (ໂຕະ, ຕັ່ງ, ຕູ້, ຕຽງ), ເຕັກນິກການເຂົ້າໄມ້, ການແກະສະຫຼັກ ແລະ ການນໍາໃຊ້ເຄື່ອງຈັກ CNC ແກະສະຫຼັກອັດຕະໂນມັດ.",
+                jobs: "ຊ່າງເຟີນີເຈີໄມ້, ເຈົ້າຂອງໂຮງງານເຟີນີເຈີ, ນັກອອກແບບເຄື່ອງເຮືອນໄມ້.",
+                modules: ["ຜະລິດຕັ່ງ/ໂຕະ/ຕຽງ/ຕູ້", "ວົງກົບແລະບານປະຕູ-ປ່ອງຢ້ຽມ", "ແກະສະຫຼັກເຄື່ອງເຟີນີເຈີ", "ການຄວບຄຸມເຄື່ອງຈັກ CNC"],
+                image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 18,
+                title: "ກົນຈັກໂຮງງານຊັ້ນສູງ (Advanced Machining)",
+                category: "mechanical",
+                badge: "ກົນຈັກ & ການຈອດ",
+                hours: "3,360 ຊົ່ວໂມງ (3 ປີ)",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ເນັ້ນໃສ່ການຜະລິດຊິ້ນສ່ວນໂລຫະດ້ວຍຄວາມລະອຽດສູງ, ການຂຽນໂປຣແກຣມ CNC, ການອອກແບບທາງກົນລະສາດ ແລະ ການຄຸ້ມຄອງການໃຊ້ເຄື່ອງຈັກກົນ.",
+                jobs: "ຊ່າງຄວບຄຸມເຄື່ອງຈັກ CNC, ຊ່າງຈັກກົນໂຮງງານ, ນັກອອກແບບ ແລະ ຜະລິດແມ່ພິມໂລຫະ.",
+                modules: ["ການປະຕິບັດຊ່າງຈັກກົນ", "ນໍາໃຊ້ເຄື່ອງຈັກເຈາະ/ຊ່ຽນ/ກັດ/ກົບ/ເຈຍລະໄນ", "ການຂຽນໂປຣແກຣມ CNC", "ການນໍາໃຊ້ເຄື່ອງຈັກ CNC"],
+                image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 19,
+                title: "ກໍ່-ໂບກອາຄານ (Masonry & Plastering)",
+                category: "construction",
+                badge: "ກໍ່ສ້າງ & ສະຖາປັດ",
+                hours: "3,360 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນຮູ້ວຽກງານກໍ່-ໂບກຝາ, ວຽກງານສໍາຫຼວດພື້ນຖານ, ການປູກະໂຣ, ການຕິດຕັ້ງເພດານ, ແລະ ການຕິດຕັ້ງລະບົບທໍ່ນໍ້າ-ສຸຂະພັນໃນອາຄານ.",
+                jobs: "ຊ່າງກໍ່-ໂບກອາຄານ, ຜູ້ຮັບເໝົາກໍ່ສ້າງທົ່ວໄປ, ຫົວໜ້າຄຸມງານກໍ່ສ້າງ.",
+                modules: ["ກໍ່ຝາດິນຈີ່-ບລັອກ-ຫີນພູ", "ເທເສົາເອັນ-ຄານເອັນ", "ຕິດຕັ້ງວົງກົບປະຕູ-ປ່ອງຢ້ຽມ", "ຕີເພດານໂຄງໄມ້-ຊີລາຍ", "ຕິດຕັ້ງທໍ່ນໍ້າ ແລະ ເຄື່ອງສຸຂະພັນ"],
+                image: "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 20,
+                title: "ກໍ່ສ້າງເບຕົງອາຄານ (Concrete Construction)",
+                category: "construction",
+                badge: "ກໍ່ສ້າງ & ສະຖາປັດ",
+                hours: "3,488 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນຮູ້ການອ່ານແບບແຕ້ມກໍ່ສ້າງ, ການຕີຜັງ, ການເຮັດຮາກຖານ, ຄານ-ເສົາ, ຂັ້ນໄດເບຕົງເສີມເຫຼັກ, ຕະຫຼອດຮອດການວາງແຜນ ແລະ ຄວບຄຸມການກໍ່ສ້າງ.",
+                jobs: "ຊ່າງເບຕົງອາຄານ, ຫົວໜ້າຄວບຄຸມການກໍ່ສ້າງ, ນັກປະເມີນລາຄາກໍ່ສ້າງ.",
+                modules: ["ຕີຜັງກໍ່ສ້າງ", "ເທພື້ນເບຕົງເສີມເຫຼັກ", "ສ້າງຄານ-ເສົາ-ຂັ້ນໄດ", "ສ້າງໂຄງຫຼັງຄາ", "ວາງແຜນ ແລະ ຄວບຄຸມການກໍ່ສ້າງ"],
+                image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 21,
+                title: "ຊ່າງຈອດໂລຫະ ລະດັບ 5 (Welding Expert)",
+                category: "mechanical",
+                badge: "ກົນຈັກ & ການຈອດ",
+                hours: "3,780 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7, ຜ່ານຊ່າງຈອດລະດັບ 4, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນຮູ້ເຕັກນິກການຈອດໄຟຟ້າຂັ້ນສູງໃນທຸກທ່າຈອດ (SMAW, TIG, MIG/MAG, FCAW, SAW) ທັງທ່າຂະໜານ, ທ່າເທິງຫົວ ແລະ ທ່າ 6G ເທິງທໍ່ຄວາມດັນສູງ.",
+                jobs: "ຊ່າງຈອດໂລຫະຄວາມລະອຽດສູງ, ຊ່າງຈອດໂຄງສ້າງເຫຼັກຂະໜາດໃຫຍ່, ຜູ້ກວດສອບຄຸນນະພາບງານຈອດ (Welding Inspector).",
+                modules: ["ການຈອດໄຟຟ້າ (SMAW)", "ການຈອດຕິກ (TIG)", "ການຈອດມິກ/ແມັກ (MIG/MAG)", "ການຈອດຟລັກຄໍ (FCAW)", "ການຈອດທ່າ 6G"],
+                image: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 22,
+                title: "ຊ່ວງລ່າງ ແລະ ຕົວຖັງລົດຍົນ (Suspension & Body)",
+                category: "automotive",
+                badge: "ເຕັກນິກລົດຍົນ",
+                hours: "3,328 ຊົ່ວໂມງ (3 ປີ)",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນການສ້ອມແປງ ແລະ ບຳລຸງຮັກສາລະບົບຮອງຮັບ (ຊ່ວງລ່າງ), ລະບົບພວງມາໄລ, ລະບົບເບຣກທຳມະດາ ແລະ ABS, ລວມເຖິງລະບົບສົ່ງກຳລັງເກຍທຳມະດາ-ໂອໂຕ.",
+                jobs: "ຊ່າງສ້ອມແປງຊ່ວງລ່າງລົດຍົນ, ຊ່າງຕັ້ງສູນຖ່ວງລໍ້, ພະນັກງານເຕັກນິກໃນສູນບໍລິການລົດຍົນ.",
+                modules: ["ລະບົບເບຣກ ABS", "ລະບົບຮອງຮັບ (Suspension)", "ບັງຂັບລ້ຽວ (ໄຮໂດລິກ-ໄຟຟ້າ)", "ເກຍທຳມະດາ-ອັດຕະໂນມັດ", "ເພົາກາງ-ເພົາຂັບ-ເຟືອງທ້າຍ"],
+                image: "https://images.unsplash.com/photo-1486006396113-ad754976ad48?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 23,
+                title: "ສ້ອມແປງຕົວຖັງ ແລະ ສີລົດຍົນ (Auto Body & Paint)",
+                category: "automotive",
+                badge: "ເຕັກນິກລົດຍົນ",
+                hours: "3,328 ຊົ່ວໂມງ (3 ປີ)",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນຮູ້ເຕັກນິກການດຶງ-ດັນຕົວຖັງລົດທີ່ຖືກຕຳໃຫ້ຄືນສະພາບເດີມ, ການໂປ້ສີ, ການກຽມພື້ນຜິວ, ການພົ່ນສີ ແລະ ການຂັດເງົາສີລົດຍົນ.",
+                jobs: "ຊ່າງເຄາະລົກ, ຊ່າງພົ່ນສີລົດຍົນ, ຜູ້ປະເມີນຄວາມເສຍຫາຍຂອງລົດຍົນກັບບໍລິສັດປະກັນໄພ.",
+                modules: ["ກວດຈອດຕົວຖັງລົດ", "ຂັດເງົາສີລົດ", "ກຽມພື້ນຜິວ-ໂປ້ສີ", "ພົ່ນສີ", "ດຶງ-ດັນຕົວຖັງ", "ບໍລິການຊິ້ນສ່ວນຕົວຖັງ"],
+                image: "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 24,
+                title: "ສ້ອມແປງເຄື່ອງຈັກລົດຍົນ (Engine Maintenance)",
+                category: "automotive",
+                badge: "ເຕັກນິກລົດຍົນ",
+                hours: "3,136 ຊົ່ວໂມງ (3 ປີ)",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນການສ້ອມແປງເຄື່ອງຈັກແອັດຊັງ ແລະ ກາຊວນ, ລະບົບຄວບຄຸມເຄື່ອງຈັກດ້ວຍເອເລັກໂຕຣນິກ, ແລະ ພື້ນຖານການບໍລິການລົດຍົນໄຮບຣິດ (Hybrid).",
+                jobs: "ຊ່າງສ້ອມແປງເຄື່ອງຈັກລົດຍົນ, ຫົວໜ້າຊ່າງ, ວິຊາການປະຈໍາອູ່ສ້ອມແປງລົດຍົນ.",
+                modules: ["ລະບົບລໍ່ມີ່ນ-ຫຼໍ່ເຢັນ", "ລະບົບເຊື້ອໄຟກາຊວນ", "ສ້ອມແປງເຄື່ອງຈັກແອັດຊັງ-ກາຊວນ", "ເຄື່ອງຈັກຄວບຄຸມດ້ວຍເອເລັກໂຕຣນິກ", "ບໍລິການລົດໄຮບຣິດ ແລະ ລົດໄຟຟ້າ"],
+                image: "https://images.unsplash.com/photo-1517524206127-48bbd363f3d7?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 25,
+                title: "ສ້ອມແປງໄຟຟ້າລົດຍົນ ແລະ ຍານພາຫະນະ EV (Auto Electrical)",
+                category: "automotive",
+                badge: "ເຕັກນິກລົດຍົນ",
+                hours: "3,328 ຊົ່ວໂມງ (3 ປີ)",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນຮູ້ລະບົບໄຟຟ້າລົດຍົນທັງໝົດ, ໄຟແສງສະຫວ່າງ, ລະບົບແອລົດຍົນ, ແລະ ການຈັດການລະບົບຍານພາຫະນະໄຟຟ້າ (EV) ລວມທັງໝໍ້ໄຟແຮງດັນສູງ.",
+                jobs: "ຊ່າງໄຟຟ້າລົດຍົນ, ຊ່າງສ້ອມແປງລົດໄຟຟ້າ (EV Technician), ຜູ້ຊ່ຽວຊານລະບົບແອລົດຍົນ.",
+                modules: ["ລະບົບສະຕາດ-ອຸ່ນອາກາດ", "ໄຟເຕືອນ-ແສງສະຫວ່າງ", "ລະບົບປັບອາກາດລົດຍົນ", "ໄຟຄວບຄຸມເກຍໂອໂຕ", "ລົດໄຮບຣິດ ແລະ ລົດໄຟຟ້າ (EV)"],
+                image: "https://images.unsplash.com/photo-1507136566006-cfc505b114fc?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 26,
+                title: "ເຄື່ອງປະດັບ ແລະ ອັນຍະມະນີ (Jewelry Making)",
+                category: "arts",
+                badge: "ສິລະປະ & ການອອກແບບ",
+                hours: "3,392 ຊົ່ວໂມງ",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນຮູ້ສິລະປະການຜະລິດຄໍາຮູບປະພັນ, ການແຕ້ມຮູບພາບລາຍລາວ, ການສີດທຽນ, ການຫຼໍ່ເຄື່ອງປະດັບ ແລະ ການນໍາໃຊ້ເຄື່ອງພິມແມ່ແບບ 3D (3D Print).",
+                jobs: "ຊ່າງຜະລິດເຄື່ອງປະດັບ, ນັກອອກແບບອັນຍະມະນີ, ຜູ້ປະເມີນຄຸນນະພາບເພັດ-ພອຍ, ເຈົ້າຂອງທຸລະກິດຮ້ານຄຳ/ເຄື່ອງປະດັບ.",
+                modules: ["ການສ້າງແບບຕົ້ນສະບັບ (Master model)", "ການແຕ້ມຮູບລາຍປະດັບ", "ການປໍ້າຂຶ້ນຮູບ", "ການສີດທຽນ", "ການຫຼໍ່ເຄື່ອງປະດັບ"],
+                image: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 27,
+                title: "ຊ່າງເຄື່ອງເຢັນ ແລະ ເຄື່ອງປັບອາກາດຊັ້ນສູງ (Refrigeration)",
+                category: "electrical",
+                badge: "ໄຟຟ້າ & ເຄື່ອງເຢັນ",
+                hours: "3,568 ຊົ່ວໂມງ (3 ປີ)",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນການຕິດຕັ້ງ-ສ້ອມແປງຕູ້ເຢັນ, ຕູ້ແຊ່, ເຄື່ອງປັບອາກາດທົ່ວໄປ ແລະ ເຄື່ອງປັບອາກາດອຸດສາຫະກຳຂະໜາດໃຫຍ່ (Chiller), ລວມທັງລະບົບຄວບຄຸມອັດຕະໂນມັດ IoT.",
+                jobs: "ຊ່າງເຕັກນິກເຄື່ອງເຢັນ, ຊ່າງຕິດຕັ້ງແອອຸດສາຫະກຳ, ວິຊາການລະບົບ Chiller ໃນຫ້ອງເຢັນ ຫຼື ຫ້າງສັບພະສິນຄ້າ.",
+                modules: ["ການສ້ອມແປງຕູ້ເຢັນ-ຕູ້ແຊ່", "ຕິດຕັ້ງ-ບໍລິການເຄື່ອງປັບອາກາດແຍກສ່ວນ", "ຕິດຕັ້ງລະບົບຄວບຄຸມ IoT", "ຕິດຕັ້ງເຄື່ອງປັບອາກາດອຸດສາຫະກຳ", "ລະບົບຊິນເລີ (Chiller)"],
+                image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800&auto=format&fit=crop"
+            },
+            {
+                id: 28,
+                title: "ໄຟຟ້າໃນອາຄານ (Building Electrical)",
+                category: "electrical",
+                badge: "ໄຟຟ້າ & ເຄື່ອງເຢັນ",
+                hours: "3,684 ຊົ່ວໂມງ (3 ປີ)",
+                requirements: "ຈົບ ມ.7 ຫຼື ທຽບເທົ່າ, ອາຍຸ 17 ປີຂຶ້ນໄປ",
+                about: "ຮຽນຮູ້ການແຕ້ມແບບໄຟຟ້າ, ການເດີນສາຍໄຟ, ການຕິດຕັ້ງຕູ້ຄວບຄຸມໄຟຟ້າ, ລະບົບປ້ອງກັນຟ້າຜ່າ, ລະບົບໄຟຟ້າແສງຕາເວັນ (Solar Cell) ແລະ ລະບົບເຕືອນໄພອັດຕະໂນມັດ.",
+                jobs: "ຊ່າງຕິດຕັ້ງໄຟຟ້າໃນອາຄານ, ວິຊາການໄຟຟ້າປະຈໍາໂຄງການ, ຜູ້ຮັບເໝົາວາງລະບົບໄຟຟ້າ.",
+                modules: ["ການເດີນສາຍໄຟແລະຕິດຕັ້ງປັກສຽບ", "ລະບົບແສງສະຫວ່າງແລະສາຍດິນ", "ລະບົບໄຟຟ້າແສງຕາເວັນ", "ລະບົບເຕືອນໄພແລະຄວບຄຸມອັດຕະໂນມັດ", "ການຕິດຕັ້ງໝໍ້ນັບໄຟ"],
+                image: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=800&auto=format&fit=crop"
+            }
+        ];
+
+        // 10 RICH SLIDES DEFINITIONS
+        const slides = [
+            {
+                title: "ຍິນດີຕ້ອນຮັບສູ່ໂລກແຫ່ງວິຊາຊີບ (TVET)",
+                subtitle: "ສ້າງອະນາຄົດຂອງທ່ານດ້ວຍສີມືແຮງງານທີ່ມີຄຸນນະພາບ",
+                description: "ການເລືອກຮຽນວິຊາຊີບຊັ້ນສູງ ແມ່ນເສັ້ນທາງລັດທີ່ເຕັມไปด้วยໂອກາດ ແລະ ການປະຕິບັດຕົວຈິງ. ມາຮ່ວມກັນສຶກສາ 28 ຫຼັກສູດທີ່ແບ່ງອອກເປັນ 8 ກຸ່ມອາຊີບຫຼັກ ເພື່ອຊອກຫາຕົວຕົນຂອງທ່ານ.",
+                image: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=800&auto=format&fit=crop",
+                type: "welcome"
+            },
+            {
+                title: "ກຸ່ມວິສະວະກຳລົດຍົນ ແລະ ຍານພາຫະນະ EV",
+                subtitle: "ເທັກໂນໂລຊີຍານຍົນຍຸກໃໝ່",
+                description: "ຮຽນຮູ້ການສ້ອມແປງເຄື່ອງຈັກ, ຕົວຖັງ, ສີ ແລະ ໄຟຟ້າລົດຍົນ. ຈຸດເດັ່ນແມ່ນການເພີ່ມເຕີມທັກສະການບຳລຸງຮັກສາລົດໄຟຟ້າ (EV) ແລະ ໄຮບຣິດ ເພື່ອຕອບສະໜອງຕະຫຼາດສະໄໝໃໝ່.",
+                list: ["ຊ່ວງລ່າງ ແລະ ຕົວຖັງລົດຍົນ (3,328 ຊົ່ວໂມງ)", "ສ້ອມແປງຕົວຖັງ ແລະ ສີ (3,328 ຊົ່ວໂມງ)", "ສ້ອມແປງເຄື່ອງຈັກລົດຍົນ (3,136 ຊົ່ວໂມງ)", "ສ້ອມແປງໄຟຟ້າລົດຍົນ ແລະ EV (3,328 ຊົ່ວໂມງ)"],
+                image: "https://images.unsplash.com/photo-1486006396113-ad754976ad48?q=80&w=800&auto=format&fit=crop",
+                type: "category",
+                catLink: "automotive"
+            },
+            {
+                title: "ກຸ່ມໄຟຟ້າ, ເຄື່ອງເຢັນ ແລະ ພະລັງງານ",
+                subtitle: "ພະລັງງານ ແລະ ຄວາມເຢັນຂັບເຄື່ອນໂລກ",
+                description: "ສຶກສາການວາງລະບົບໄຟຟ້າອາຄານ, ການແຕ້ມແບບ, ການຕິດຕັ້ງເຄື່ອງໃຊ້ໄຟຟ້າ, ເຄື່ອງປັບອາກາດອຸດສາຫະກຳ (Chiller), ລວມທັງພະລັງງານສະອາດ ເຊັ່ນ ໂຊລາເຊວ (Solar Cell) ແລະ ລະບົບ IoT.",
+                list: ["ສ້ອມແປງເຄື່ອງໃຊ້ໄຟຟ້າໃນຄົວເຮືອນ (2,688 ຊົ່ວໂມງ)", "ໄຟຟ້າໃນອາຄານ (3,684 ຊົ່ວໂມງ)", "ຊ່າງເຄື່ອງເຢັນ ແລະ ແອຊັ້ນສູງ (3,568 ຊົ່ວໂມງ)"],
+                image: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=800&auto=format&fit=crop",
+                type: "category",
+                catLink: "electrical"
+            },
+            {
+                title: "ກຸ່ມກົນຈັກໂຮງງານ ແລະ ເຕັກນິກການຈອດ",
+                subtitle: "ກະດູກສັນຫຼັງຂອງຂະແໜງອຸດສາຫະກຳ",
+                description: "ຮຽນຮູ້ກ່ຽວກັບເຄື່ອງຈັກກົນໜັກ, ການຂຽນໂປຣແກຣມ CNC ຄວາມລະອຽດສູງ, ແລະ ການຈອດໂລຫະທຸກທ່າ (ຈົນຮອດທ່າ 6G) ເພື່ອເຮັດວຽກໃນໂຄງສ້າງ ແລະ ໂຮງງານອຸດສາຫະກຳຂະໜາດໃຫຍ່.",
+                list: ["ສ້ອມແປງເຄື່ອງຈັກກົນໂຮງງານຊັ້ນສູງ (3,360 ຊົ່ວໂມງ)", "ກົນຈັກໂຮງງານຊັ້ນສູງ (3,360 ຊົ່ວໂມງ)", "ຊ່າງຈອດໂລຫະ ລະດັບ 5 (3,780 ຊົ່ວໂມງ)"],
+                image: "https://images.unsplash.com/photo-1508962914676-134849a727f0?q=80&w=800&auto=format&fit=crop",
+                type: "category",
+                catLink: "mechanical"
+            },
+            {
+                title: "ກຸ່ມໄອທີ, ດິຈິຕອນ ແລະ ພັດທະນາເວັບໄຊ",
+                subtitle: "ສ້າງສັນໂລກສະເໝືອນດ້ວຍປາຍນິ້ວ",
+                description: "ພັດທະນາທັກສະໃນການຂຽນ Code, ການອອກແບບປະສົບການຜູ້ໃຊ້ UX/UI, ການພັດທະນາເວັບໄຊ Responsive, ການຈັດການຖານຂໍ້ມູນ, ຕະຫຼອດຮອດການວາງລະບົບຄວາມປອດໄພເຄືອຂ່າຍ Server ແລະ ສາຍ Fiber Optic.",
+                list: ["ການພັດທະນາໂປຣແກຣມ (3,466 ຊົ່ວໂມງ)", "ອອກແບບ ແລະ ພັດທະນາເວັບໄຊ (3,546 ຊົ່ວໂມງ)", "ເຕັກນິກເຄືອຂ່າຍຄອມພິວເຕີ (3,402 ຊົ່ວໂມງ)"],
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?q=80&w=800&auto=format&fit=crop",
+                type: "category",
+                catLink: "it"
+            },
+            {
+                title: "ກຸ່ມບໍລິຫານ, ໂລຈິສຕິກ ແລະ ຄ້າດີຈີຕອນ",
+                subtitle: "ການຈັດການ ແລະ ກະຈາຍສິນຄ້າຍຸກໃໝ່",
+                description: "ສຸມໃສ່ການຄ້າຂາຍແບບດີຈີຕອນ, ການຕະຫຼາດຜ່ານ Social Media, ການຈັດຊື້, ການນໍາໃຊ້ໂປຣແກຣມ ERP, ຕ່ອງໂສ້ອຸປະທານ (Supply Chain) ແລະ ການບໍລິຫານຄັງສິນຄ້າດ້ວຍລະບົບ AI ທີ່ທັນສະໄໝ.",
+                list: ["E-Commerce ແລະ AI (3,376 ຊົ່ວໂມງ)", "ການຂົນສົ່ງສິນຄ້າ - Logistics (3,376 ຊົ່ວໂມງ)", "ການຈັດຊື້ສິນຄ້າ - Procurement (3,376 ຊົ່ວໂມງ)", "ການຕະຫຼາດເອເລັກໂຕຣນິກ - E-Marketing (3,376 ຊົ່ວໂມງ)", "ການບໍລິຫານການຜະລິດສິນຄ້າ (3,392 ຊົ່ວໂມງ)", "ການບໍລິຫານສາງສິນຄ້າ (3,376 ຊົ່ວໂມງ)"],
+                image: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=800&auto=format&fit=crop",
+                type: "category",
+                catLink: "business"
+            },
+            {
+                title: "ກຸ່ມວຽກງານກໍ່ສ້າງ ແລະ ໂຄງລ່າງພື້ນຖານ",
+                subtitle: "ກໍ່ຮ່າງສ້າງໂຕ ດ້ວຍຄວາມຮູ້ທີ່ໝັ້ນຄົງ",
+                description: "ສອນທັກສະການອ່ານແບບ, ການກໍ່-ໂບກອາຄານ, ປູກະໂຣ, ຕິດຕັ້ງລະບົບສຸຂະພັນ, ແລະ ການເຮັດໂຄງສ້າງເບຕົງເສີມເຫຼັກຂອງອາຄານທຸກຂະໜາດ ພາຍໃຕ້ມາດຕະຖານຄວາມປອດໄພສູງ.",
+                list: ["ກໍ່-ໂບກອາຄານ (3,360 ຊົ່ວໂມງ)", "ກໍ່ສ້າງເບຕົງອາຄານ (3,488 ຊົ່ວໂມງ)"],
+                image: "https://images.unsplash.com/photo-1590069261209-f8e9b8642343?q=80&w=800&auto=format&fit=crop",
+                type: "category",
+                catLink: "construction"
+            },
+            {
+                title: "ກຸ່ມສິລະປະການອອກແບບ ແລະ ເຄື່ອງປະດັບ",
+                subtitle: "ປ່ຽນແນວຄິດສ້າງສັນໃຫ້ເປັນຜະລິດຕະພັນທີ່ມີມູນຄ່າ",
+                description: "ຮຽນຮູ້ສິລະປະການອອກແບບກຣາບຟິກ, ການຕັດຫຍິບແຟຊັ່ນລະດັບສູງ, ການອອກແບບ ແລະ ຜະລິດເຟີນີເຈີໄມ້ CNC, ຈົນເຖິງການຜະລິດເຄື່ອງປະດັບອັນຍະມະນີ ແລະ ການພິມ 3D.",
+                list: ["ຕັດຫຍິບເຄື່ອງນຸ່ງ (3,534 ຊົ່ວໂມງ)", "ກຣາບຟິກ ແລະ ສື່ໂຄສະນາ (3,370 ຊົ່ວໂມງ)", "ຊ່າງຜະລິດເຟີນີເຈີໄມ້ (3,360 ຊົ່ວໂມງ)", "ເຄື່ອງປະດັບ ແລະ ອັນຍະມະນີ (3,392 ຊົ່ວໂມງ)"],
+                image: "https://images.unsplash.com/photo-1533090161767-e6ffed986c88?q=80&w=800&auto=format&fit=crop",
+                type: "category",
+                catLink: "arts"
+            },
+            {
+                title: "ກຸ່ມບໍລິຫານການທ່ອງທ່ຽວ, ໂຮງແຮມ ແລະ ປຸງແຕ່ງ",
+                subtitle: "ການບໍລິການລະດັບສາກົນ ແລະ ສິລະປະອາຫານ",
+                description: "ຮຽນຮູ້ການປຸງແຕ່ງອາຫານລາວ-ສາກົນ, ເຂົ້າໜົມ ແລະ ເຄັກ, ວຽກງານຕ້ອນຮັບສ່ວນໜ້າ ແລະ ແມ່ບ້ານໃນໂຮງແຮມ, ການບໍລິຫານການທ່ອງທ່ຽວ ແລະ ການຈັດການງານລ້ຽງລະດັບພຣີມ່ຽມ.",
+                list: ["ປຸງແຕ່ງອາຫານ ແລະ ບໍລິການເຄື່ອງດື່ມ (3,360 ຊົ່ວໂມງ)", "ການບໍລິຫານການທ່ອງທ່ຽວ (2,880 ຊົ່ວໂມງ)", "ການບໍລິຫານການໂຮງແຮມ (2,752 ຊົ່ວໂມງ)"],
+                image: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?q=80&w=800&auto=format&fit=crop",
+                type: "category",
+                catLink: "hospitality"
+            },
+            {
+                title: "ເງື່ອນໄຂທົ່ວໄປ ແລະ ສິດຜົນປະໂຫຍດ",
+                subtitle: "ຄວາມພ້ອມກ່ອນການເລີ່ມຕົ້ນຮຽນ",
+                description: "ທຸກໆຫຼັກສູດເນັ້ນການຮຽນຮູ້ແບບລົງມືປະຕິບັດຕົວຈິງໃນສະຖານທີ່ຈຳລອງ ແລະ ມີໄລຍະເວລາຝຶກງານກັບບໍລິສັດຄູ່ຮ່ວມງານ.",
+                conditions: [
+                    "<strong>ວຸດທິການສຶກສາ:</strong> ຈົບຊັ້ນ ມ.7 ຫຼື ທຽບເທົ່າຂຶ້ນໄປ (ບາງຫຼັກສູດຮັບ ມ.3 ທີ່ມີໃບຢັ້ງຢືນຝຶກອົບຮົມວິຊາຊີບ).",
+                    "<strong>ເພດ ແລະ ອາຍຸ:</strong> ບໍ່ຈຳກັດເພດ, ອາຍຸ 17 ປີຂຶ້ນໄປ.",
+                    "<strong>ຄຸນສົມບັດ:</strong> ມີສຸຂະພາບແຂງແຮງ, ບໍ່ເປັນພະຍາດຕິດຕໍ່ຮ້າຍແຮງ ແລະ ມີຄວາມຕັ້ງໃຈຮຽນຮູ້ວິຊາຊີບ."
+                ],
+                image: "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?q=80&w=800&auto=format&fit=crop",
+                type: "summary"
+            }
+        ];
+
+        // 4 CORE QUIZ QUESTIONS
+        const quizQuestions = [
+            {
+                question: "1. ເວລາວ່າງ ທ່ານມັກເຮັດກິດຈະກຳໃດຫຼາຍທີ່ສຸດ?",
+                answers: [
+                    { text: "ມັກມ້າງ, ແປງ ຫຼື ສຶກສາວິທີການເຮັດວຽກຂອງອຸປະກອນຕ່າງໆ", weight: { automotive: 3, electrical: 3, mechanical: 2 } },
+                    { text: "ມັກຫຼິ້ນຄອມພິວເຕີ, ເຂົ້າເວັບໄຊ, ຫຼື ສຶກສາເຕັກໂນໂລຊີໃໝ່ໆ", weight: { it: 4, business: 1 } },
+                    { text: "ມັກຂາຍເຄື່ອງອອນລາຍ, ຄິດຄອນເທັ້ນ ຫຼື ໂຄສະນາສິນຄ້າ", weight: { business: 4, arts: 1 } },
+                    { text: "ມັກແຕ້ມຮູບ, ອອກແບບເສື້ອຜ້າ ຫຼື ຈັດຫ້ອງໃໝ່", weight: { arts: 4, construction: 1 } }
+                ]
+            },
+            {
+                question: "2. ທ່ານມີຄວາມຮູ້ສຶກແນວໃດກັບຄະນິດສາດ ແລະ ການຄິດໄລ່?",
+                answers: [
+                    { text: "ມັກການຄິດໄລ່ທີ່ຊັດເຈນ ເຊັ່ນ ໂຄງສ້າງ, ແບບແຕ້ມ ຫຼື ການຈອດ", weight: { construction: 3, mechanical: 3 } },
+                    { text: "ມັກການຄິດໄລ່ຂໍ້ມູນ, ລາຍຮັບ-ລາຍຈ່າຍ ແລະ ການວິເຄາະທຸລະກິດ", weight: { business: 3, hospitality: 2 } },
+                    { text: "ມັກການແກ້ໄຂບັນຫາແບບມີເຫດຜົນ ເຊັ່ນ ການຂຽນລະຫັດ Code", weight: { it: 4 } },
+                    { text: "ບໍ່ມັກຄຳນວນເລິກເຊິ່ງ, ເນັ້ນການປະຕິບັດ ແລະ ສິລະປະຄວາມງາມ", weight: { arts: 3, hospitality: 3 } }
+                ]
+            },
+            {
+                question: "3. ສະຖານທີ່ເຮັດວຽກໃນຝັນຂອງທ່ານເປັນແນວໃດ?",
+                answers: [
+                    { text: "ຫ້ອງການທີ່ທັນສະໄໝ ຫຼື ເຮັດວຽກຢູ່ເຮືອນ (Work from home)", weight: { it: 3, arts: 2 } },
+                    { text: "ສູນບໍລິການ, ໂຮງງານອຸດສາຫະກຳ ຫຼື ບ່ອນທີ່ມີເຄື່ອງຈັກໃຫ້ລົງມື", weight: { automotive: 3, mechanical: 3, electrical: 2 } },
+                    { text: "ໂຮງແຮມ, ຮ້ານອາຫານ ຫຼື ແຫຼ່ງທ່ອງທ່ຽວທຳມະຊາດ", weight: { hospitality: 4 } },
+                    { text: "ສາງສິນຄ້າ, ບໍລິສັດຂົນສົ່ງ ຫຼື ສະຖານທີ່ກໍ່ສ້າງອາຄານ", weight: { business: 2, construction: 3 } }
+                ]
+            },
+            {
+                question: "4. ທັກສະສ່ວນຕົວໃດທີ່ທ່ານຄິດວ່າຕົນເອງເຮັດໄດ້ດີ?",
+                answers: [
+                    { text: "ຄວາມອົດທົນ, ຄວາມລະອຽດອ່ອນ ແລະ ການເຮັດວຽກກັບສິ່ງຂອງ", weight: { mechanical: 3, electrical: 3, arts: 2 } },
+                    { text: "ການສື່ສານ, ການເຈລະຈາ ແລະ ການບໍລິການລູກຄ້າ", weight: { business: 3, hospitality: 4 } },
+                    { text: "ຄວາມຄິດສ້າງສັນ, ນຳສະເໜີສິ່ງໃໝ່ໆ ແລະ ວຽກງານສື່", weight: { arts: 3, business: 2 } },
+                    { text: "ການວິເຄາະບັນຫາ, ຄວາມເປັນລະບຽບ ແລະ ເຕັກໂນໂລຊີ", weight: { it: 3, business: 2 } }
+                ]
+            }
+        ];
+
+        // APP STATE VARIABLES
+        let currentSlideIndex = 0;
+        let currentQuizQuestion = 0;
+        let quizAnswersWeight = {
+            automotive: 0,
+            electrical: 0,
+            mechanical: 0,
+            it: 0,
+            business: 0,
+            construction: 0,
+            arts: 0,
+            hospitality: 0
+        };
+
+        // VIEW NAVIGATION
+        function switchView(viewName) {
+            document.getElementById('view-slides').classList.add('hidden');
+            document.getElementById('view-directory').classList.add('hidden');
+            document.getElementById('view-quiz').classList.add('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.className = 'nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition text-brand-100 hover:text-white';
+            });
+
+            if (viewName === 'slides') {
+                document.getElementById('view-slides').classList.remove('hidden');
+                document.getElementById('btn-slides').className = 'nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition bg-amber-500 text-brand-900';
+            } else if (viewName === 'directory') {
+                document.getElementById('view-directory').classList.remove('hidden');
+                document.getElementById('btn-directory').className = 'nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition bg-amber-500 text-brand-900';
+                buildDirectory();
+            } else if (viewName === 'quiz') {
+                document.getElementById('view-quiz').classList.remove('hidden');
+                document.getElementById('btn-quiz').className = 'nav-btn px-4 py-2 rounded-lg text-sm font-semibold transition bg-amber-500 text-brand-900';
+                resetQuiz();
+            }
+        }
+
+        // ==================== SLIDE RENDER LOGIC ====================
+        function renderSlide() {
+            const container = document.getElementById('slide-content-container');
+            const slide = slides[currentSlideIndex];
+            
+            // Badge & Counter
+            document.getElementById('slide-badge').innerText = slide.type === 'welcome' ? 'ຍິນດີຕ້ອນຮັບ' : (slide.type === 'summary' ? 'ສະຫຼຸບຂໍ້ມູນ' : 'ໝວດໝູ່ອາຊີບ');
+            document.getElementById('slide-counter').innerText = `ສະໄລ້ທີ ${currentSlideIndex + 1} ຈາກ ${slides.length}`;
+
+            // Build Slide Inside
+            let contentHtml = `
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-7 flex flex-col justify-center">
+                        <h2 class="text-3xl md:text-4xl font-bold text-brand-900 mb-2 leading-tight">${slide.title}</h2>
+                        <h4 class="text-lg md:text-xl font-semibold text-amber-500 mb-5">${slide.subtitle}</h4>
+                        <p class="text-slate-600 text-base md:text-lg mb-6">${slide.description}</p>
+            `;
+
+            if (slide.list) {
+                contentHtml += `<div class="mb-6"><h5 class="font-bold text-slate-800 mb-2">ສາຂາວິຊາພາຍໃນກຸ່ມ:</h5><ul class="grid grid-cols-1 sm:grid-cols-2 gap-2 text-sm text-slate-600">`;
+                slide.list.forEach(item => {
+                    contentHtml += `<li class="flex items-center gap-2"><i class="fa-solid fa-circle-check text-brand-600 text-xs"></i> <span>${item}</span></li>`;
+                });
+                contentHtml += `</ul></div>`;
+            }
+
+            if (slide.conditions) {
+                contentHtml += `<div class="space-y-3 mb-6">`;
+                slide.conditions.forEach(cond => {
+                    contentHtml += `<p class="text-sm text-slate-600 flex items-start gap-2.5"><i class="fa-solid fa-circle-info text-amber-500 mt-1"></i> <span>${cond}</span></p>`;
+                });
+                contentHtml += `</div>`;
+            }
+
+            if (slide.catLink) {
+                contentHtml += `
+                    <div>
+                        <button onclick="viewCategoryFromSlide('${slide.catLink}')" class="inline-flex items-center gap-2 bg-brand-50 hover:bg-brand-100 text-brand-700 font-bold px-4 py-2.5 rounded-xl text-sm transition">
+                            <i class="fa-solid fa-folder-open"></i> ເບິ່ງລາຍລະອຽດທັງໝົດໃນໝວດນີ້
+                        </button>
+                    </div>
+                `;
+            }
+
+            contentHtml += `
+                    </div>
+                    <div class="lg:col-span-5 h-[320px] rounded-2xl overflow-hidden shadow-xl border border-slate-100 relative">
+                        <img src="${slide.image}" alt="${slide.title}" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent"></div>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = contentHtml;
+            updateDots();
+        }
+
+        function viewCategoryFromSlide(cat) {
+            switchView('directory');
+            filterCategory(cat);
+            showToast("ເປີດໝວດໝູ່ອາຊີບ: " + cat, "fa-solid fa-folder-open");
+        }
+
+        function nextSlide() {
+            if (currentSlideIndex < slides.length - 1) {
+                currentSlideIndex++;
+                renderSlide();
+            } else {
+                showToast("ນີ້ແມ່ນສະໄລ້ສຸດທ້າຍແລ້ວ!", "fa-solid fa-circle-info");
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideIndex > 0) {
+                currentSlideIndex--;
+                renderSlide();
+            } else {
+                showToast("ນີ້ແມ່ນສະໄລ້ທຳອິດແລ້ວ!", "fa-solid fa-circle-info");
+            }
+        }
+
+        function updateDots() {
+            const dotsContainer = document.getElementById('slide-dots');
+            let dotsHtml = '';
+            for (let i = 0; i < slides.length; i++) {
+                dotsHtml += `
+                    <button onclick="goToSlide(${i})" class="w-2.5 h-2.5 rounded-full transition-all duration-300 ${i === currentSlideIndex ? 'bg-brand-600 w-6' : 'bg-slate-300 hover:bg-slate-400'}"></button>
+                `;
+            }
+            dotsContainer.innerHTML = dotsHtml;
+        }
+
+        function goToSlide(index) {
+            currentSlideIndex = index;
+            renderSlide();
+        }
+
+        // ==================== DIRECTORY BUILD & FILTERS ====================
+        let activeCategory = 'all';
+
+        function buildDirectory() {
+            const grid = document.getElementById('directory-grid');
+            grid.innerHTML = '';
+
+            const filtered = courses.filter(c => {
+                const matchesSearch = c.title.toLowerCase().includes(document.getElementById('dir-search').value.toLowerCase()) || 
+                                      c.about.toLowerCase().includes(document.getElementById('dir-search').value.toLowerCase());
+                const matchesCat = activeCategory === 'all' || c.category === activeCategory;
+                return matchesSearch && matchesCat;
+            });
+
+            if (filtered.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full py-16 text-center">
+                        <i class="fa-solid fa-magnifying-glass text-slate-300 text-5xl mb-4"></i>
+                        <h4 class="text-slate-600 font-bold text-lg">ບໍ່ພົບຂໍ້ມູນຫຼັກສູດ</h4>
+                        <p class="text-slate-400 text-sm mt-1">ລອງປ່ຽນຄຳຄົ້ນຫາ ຫຼື ເລືອກໝວດໝູ່ອື່ນ</p>
+                    </div>
+                `;
+                return;
+            }
+
+            filtered.forEach(c => {
+                const card = document.createElement('div');
+                card.className = "bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-brand-100 overflow-hidden flex flex-col justify-between transition duration-300";
+                card.innerHTML = `
+                    <div>
+                        <!-- Image Container -->
+                        <div class="h-44 w-full overflow-hidden relative border-b border-slate-100">
+                            <img src="${c.image}" alt="${c.title}" class="w-full h-full object-cover">
+                            <span class="absolute top-3 left-3 bg-brand-900/95 text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm backdrop-blur-sm">${c.badge}</span>
+                            <span class="absolute bottom-3 right-3 bg-amber-500/95 text-brand-950 text-xs font-bold px-2.5 py-1 rounded-md shadow-sm backdrop-blur-sm"><i class="fa-solid fa-clock mr-1"></i>${c.hours}</span>
+                        </div>
+                        <!-- Card Body -->
+                        <div class="p-5">
+                            <h3 class="text-lg font-bold text-slate-900 leading-tight mb-2.5 hover:text-brand-700 transition cursor-pointer" onclick="openDetailsModal(${c.id})">${c.title}</h3>
+                            <p class="text-sm text-slate-500 line-clamp-3 mb-4">${c.about}</p>
+                        </div>
+                    </div>
+                    <!-- Card Footer/Actions -->
+                    <div class="px-5 py-4 bg-slate-50 border-t border-slate-100 flex justify-between items-center">
+                        <span class="text-xs text-slate-400 font-medium">ລະດັບ 5 (ຊັ້ນສູງ)</span>
+                        <button onclick="openDetailsModal(${c.id})" class="text-xs font-bold text-brand-700 hover:text-brand-900 flex items-center gap-1.5">
+                            ເບິ່ງລາຍລະອຽດ <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function filterCategory(cat) {
+            activeCategory = cat;
+            document.querySelectorAll('.cat-filter-btn').forEach(btn => {
+                if (btn.getAttribute('data-cat') === cat) {
+                    btn.className = 'cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-brand-700 text-white';
+                } else {
+                    btn.className = 'cat-filter-btn px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-100 text-slate-600 hover:bg-slate-200';
+                }
+            });
+            buildDirectory();
+        }
+
+        function filterDirectory() {
+            buildDirectory();
+        }
+
+        // DETAILS MODAL SYSTEM (No Alerts, Clean Overlays)
+        function openDetailsModal(courseId) {
+            const c = courses.find(item => item.id === courseId);
+            if (!c) return;
+
+            const modalHtml = `
+                <div id="details-modal" class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm flex justify-center items-center p-4 z-[100] opacity-0 transition-opacity duration-300">
+                    <div class="bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-y-auto shadow-2xl border border-slate-100 transform scale-95 transition-transform duration-300 flex flex-col">
+                        <!-- Top Bar -->
+                        <div class="sticky top-0 bg-white border-b border-slate-100 px-6 py-4 flex justify-between items-center z-10">
+                            <div>
+                                <span class="text-[10px] font-bold text-brand-700 bg-brand-50 px-2.5 py-1 rounded-full uppercase">${c.badge}</span>
+                                <h3 class="text-lg font-bold text-slate-900 mt-1">${c.title}</h3>
+                            </div>
+                            <button onclick="closeDetailsModal()" class="text-slate-400 hover:text-slate-600 p-2.5 rounded-full hover:bg-slate-100 transition"><i class="fa-solid fa-xmark text-lg"></i></button>
+                        </div>
+                        <!-- Modal Content -->
+                        <div class="p-6 space-y-6">
+                            <!-- Basic details list -->
+                            <div class="grid grid-cols-2 gap-4 bg-slate-50 p-4 rounded-2xl text-xs">
+                                <div>
+                                    <span class="text-slate-400 block mb-1">ໄລຍະເວລາຮຽນທັງໝົດ</span>
+                                    <strong class="text-slate-700 text-sm"><i class="fa-solid fa-clock text-brand-600 mr-1.5"></i> ${c.hours}</strong>
+                                </div>
+                                <div>
+                                    <span class="text-slate-400 block mb-1">ລະດັບໃບປະກາດ</span>
+                                    <strong class="text-slate-700 text-sm"><i class="fa-solid fa-award text-amber-500 mr-1.5"></i> ປະກາສະນີຍະບັດຊັ້ນສູງ</strong>
+                                </div>
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm mb-2"><i class="fa-solid fa-book-open text-brand-600 mr-2"></i> ສິ່ງທີ່ທ່ານຈະໄດ້ຮຽນຮູ້:</h4>
+                                <p class="text-slate-600 text-sm">${c.about}</p>
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm mb-2"><i class="fa-solid fa-briefcase text-brand-600 mr-2"></i> ອາຊີບຫຼັງຮຽນຈົບ:</h4>
+                                <p class="text-slate-600 text-sm">${c.jobs}</p>
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm mb-2"><i class="fa-solid fa-clipboard-list text-brand-600 mr-2"></i> ເງື່ອນໄຂຜູ້ເຂົ້າຮຽນ:</h4>
+                                <p class="text-slate-600 text-sm">${c.requirements}</p>
+                            </div>
+
+                            <div>
+                                <h4 class="font-bold text-slate-800 text-sm mb-2.5"><i class="fa-solid fa-layer-group text-brand-600 mr-2"></i> ວິຊາສະເພາະ (ໂມດູນຫຼັກ):</h4>
+                                <div class="flex flex-wrap gap-1.5">
+                                    ${c.modules.map(mod => `<span class="bg-slate-100 text-slate-600 text-xs px-2.5 py-1.5 rounded-lg border border-slate-200/50">${mod}</span>`).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            document.body.insertAdjacentHTML('beforeend', modalHtml);
+            
+            // Animation Trigger
+            setTimeout(() => {
+                const modal = document.getElementById('details-modal');
+                modal.classList.remove('opacity-0');
+                modal.firstElementChild.classList.remove('scale-95');
+            }, 10);
+        }
+
+        function closeDetailsModal() {
+            const modal = document.getElementById('details-modal');
+            if (!modal) return;
+            modal.classList.add('opacity-0');
+            modal.firstElementChild.classList.add('scale-95');
+            setTimeout(() => {
+                modal.remove();
+            }, 300);
+        }
+
+        // ==================== CAREER QUIZ LOGIC ====================
+        function resetQuiz() {
+            currentQuizQuestion = 0;
+            quizAnswersWeight = {
+                automotive: 0,
+                electrical: 0,
+                mechanical: 0,
+                it: 0,
+                business: 0,
+                construction: 0,
+                arts: 0,
+                hospitality: 0
+            };
+            renderQuizQuestion();
+        }
+
+        function renderQuizQuestion() {
+            const progress = document.getElementById('quiz-progress');
+            progress.style.width = `${((currentQuizQuestion + 1) / quizQuestions.length) * 100}%`;
+
+            const container = document.getElementById('quiz-card');
+            const q = quizQuestions[currentQuizQuestion];
+
+            let answersHtml = '';
+            q.answers.forEach((ans, idx) => {
+                answersHtml += `
+                    <button onclick="handleQuizAnswer(${idx})" class="w-full text-left bg-white border border-slate-200 hover:border-brand-600 hover:bg-brand-50/50 p-4 rounded-xl text-sm font-semibold text-slate-700 transition duration-200 flex items-center justify-between group">
+                        <span>${ans.text}</span>
+                        <i class="fa-solid fa-chevron-right text-slate-300 group-hover:text-brand-600 transition"></i>
+                    </button>
+                `;
+            });
+
+            container.innerHTML = `
+                <div>
+                    <span class="text-xs text-brand-600 font-bold bg-brand-50 px-3 py-1 rounded-full">ຄຳຖາມຂໍ້ທີ ${currentQuizQuestion + 1} ຈາກ ${quizQuestions.length}</span>
+                    <h3 class="text-lg md:text-xl font-bold text-slate-800 mt-3 mb-6">${q.question}</h3>
+                    <div class="space-y-3">
+                        ${answersHtml}
+                    </div>
+                </div>
+            `;
+        }
+
+        function handleQuizAnswer(index) {
+            const answer = quizQuestions[currentQuizQuestion].answers[index];
+            
+            // Add Weights
+            for (let category in answer.weight) {
+                quizAnswersWeight[category] += answer.weight[category];
+            }
+
+            if (currentQuizQuestion < quizQuestions.length - 1) {
+                currentQuizQuestion++;
+                renderQuizQuestion();
+            } else {
+                renderQuizResults();
+            }
+        }
+
+        function renderQuizResults() {
+            const container = document.getElementById('quiz-card');
+            
+            // Determine Winner Category
+            let maxWeight = -1;
+            let recommendedCategory = '';
+            for (let cat in quizAnswersWeight) {
+                if (quizAnswersWeight[cat] > maxWeight) {
+                    maxWeight = quizAnswersWeight[cat];
+                    recommendedCategory = cat;
+                }
+            }
+
+            // Category detail mapping
+            const catDetails = {
+                automotive: { name: "ວິສະວະກຳລົດຍົນ ແລະ ຍານພາຫະນະ EV", desc: "ທ່ານມີຄວາມສົນໃຈໃນການບຳລຸງຮັກສາ, ກວດເຊັກ ແລະ ສ້ອມແປງເຄື່ອງຈັກກົນໄກລົດຍົນ.", icon: "fa-solid fa-car" },
+                electrical: { name: "ໄຟຟ້າ, ເຄື່ອງເຢັນ ແລະ ພະລັງງານ", desc: "ທ່ານມັກການເຮັດວຽກທີ່ກ່ຽວຂ້ອງກັບລະບົບໄຟຟ້າ, ເຄື່ອງປັບອາກາດ ແລະ ພະລັງງານສະອາດ.", icon: "fa-solid fa-bolt" },
+                mechanical: { name: "ກົນຈັກໂຮງງານ ແລະ ເຕັກນິກການຈອດ", desc: "ທ່ານເໝາະສົມກັບການເຮັດວຽກກັບເຄື່ອງຈັກກົນໜັກ ແລະ ໂຄງສ້າງອຸດສາຫະກຳ.", icon: "fa-solid fa-gears" },
+                it: { name: "ໄອທີ, ດິຈິຕອນ ແລະ ພັດທະນາເວັບໄຊ", desc: "ທ່ານມີພອນສະຫວັນທາງດ້ານການຂຽນ Code, ການອອກແບບເວັບ ແລະ ເຕັກໂນໂລຊີເຄືອຂ່າຍ.", icon: "fa-solid fa-code" },
+                business: { name: "ບໍລິຫານ, ໂລຈິສຕິກ ແລະ ຄ້າດີຈີຕອນ", desc: "ທ່ານມີຄວາມໂດດເດັ່ນດ້ານການຄ້າ E-Commerce, ການຕະຫຼາດ, ການຈັດຊື້ ແລະ ການບໍລິຫານຄັງສິນຄ້າ.", icon: "fa-solid fa-chart-line" },
+                construction: { name: "ວຽກງານກໍ່ສ້າງ ແລະ ໂຄງລ່າງພື້ນຖານ", desc: "ທ່ານມັກວຽກງານພັດທະນາ, ການກໍ່ສ້າງອາຄານ, ການສໍາຫຼວດ ແລະ ການຄວບຄຸມໂຄງສ້າງ.", icon: "fa-solid fa-building" },
+                arts: { name: "ສິລະປະການອອກແບບ ແລະ ເຄື່ອງປະດັບ", desc: "ທ່ານເປັນຄົນມີຄວາມຄິດສ້າງສັນສູງ, ມັກວຽກງານກຣາບຟິກ, ການຕັດຫຍິບ ຫຼື ເຟີນີເຈີ.", icon: "fa-solid fa-palette" },
+                hospitality: { name: "ການທ່ອງທ່ຽວ, ໂຮງແຮມ ແລະ ປຸງແຕ່ງອາຫານ", desc: "ທ່ານມີຈິດໃຈຮັກການບໍລິການ, ມັກການປຸງແຕ່ງອາຫານ ຫຼື ການສ້າງສັນປະສົບການທີ່ດີໃຫ້ກັບລູກຄ້າ.", icon: "fa-solid fa-utensils" }
+            };
+
+            const rec = catDetails[recommendedCategory];
+
+            container.innerHTML = `
+                <div class="text-center py-6">
+                    <div class="inline-flex items-center justify-center bg-brand-50 text-brand-700 w-16 h-16 rounded-2xl text-3xl mb-4 shadow-sm border border-brand-100">
+                        <i class="${rec.icon}"></i>
+                    </div>
+                    <h4 class="text-slate-400 text-xs font-bold uppercase tracking-wider mb-1">ໝວດໝູ່ທີ່ເໝາະກັບທ່ານທີ່ສຸດ:</h4>
+                    <h3 class="text-2xl font-bold text-slate-800 mb-3">${rec.name}</h3>
+                    <p class="text-slate-500 text-sm max-w-md mx-auto mb-6">${rec.desc}</p>
+                    
+                    <div class="flex gap-2.5 justify-center">
+                        <button onclick="viewCategoryFromQuiz('${recommendedCategory}')" class="bg-brand-700 hover:bg-brand-800 text-white px-5 py-2.5 rounded-xl text-xs font-bold transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-folder-open"></i> ຄົ້ນຫາສາຂາວິຊາໃນໝວດນີ້
+                        </button>
+                        <button onclick="resetQuiz()" class="bg-slate-100 hover:bg-slate-200 text-slate-600 px-5 py-2.5 rounded-xl text-xs font-bold transition">
+                            <i class="fa-solid fa-arrow-rotate-right mr-1"></i> ທົດສອບຄືນໃໝ່
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        function viewCategoryFromQuiz(cat) {
+            switchView('directory');
+            filterCategory(cat);
+            showToast("ເປີດໝວດໝູ່: " + cat, "fa-solid fa-magnifying-glass");
+        }
+
+        // ==================== APP SYSTEM WIDGETS ====================
+        function showToast(text, iconClass) {
+            const toast = document.getElementById('toast');
+            const toastText = document.getElementById('toast-text');
+            const toastIcon = document.getElementById('toast-icon');
+
+            toastText.innerText = text;
+            toastIcon.className = iconClass || 'fa-solid fa-circle-info text-amber-400';
+
+            // Show animation
+            toast.classList.remove('translate-y-20', 'opacity-0');
+            
+            // Auto hide
+            setTimeout(() => {
+                toast.classList.add('translate-y-20', 'opacity-0');
+            }, 3000);
+        }
+
+        // INIT LOAD FUNCTIONS
+        window.onload = function() {
+            renderSlide();
+        };
+    </script>
+</body>
+</html>
